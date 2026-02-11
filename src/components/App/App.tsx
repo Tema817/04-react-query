@@ -26,7 +26,7 @@ export default function App() {
     queryKey: ['movies', query, page],
     queryFn: () => fetchMovies(query, page),
     enabled: !!query.trim(),
-    placeholderData: (prev) => prev,
+    placeholderData: (prev: FetchMoviesResponse | undefined) => prev,
     initialData: { page: 1, results: [], total_pages: 0, total_results: 0 },
   });
 
@@ -60,7 +60,7 @@ export default function App() {
               pageCount={totalPages}
               pageRangeDisplayed={5}
               marginPagesDisplayed={1}
-              onPageChange={({ selected }) => setPage(selected + 1)}
+              onPageChange={({ selected }: { selected: number }) => setPage(selected + 1)}
               forcePage={page - 1}
               containerClassName={css.pagination}
               activeClassName={css.active}
